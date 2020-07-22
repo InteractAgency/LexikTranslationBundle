@@ -313,9 +313,26 @@ app.directive('editableRow', [
                 $scope.enableMode = function (mode) {
                     $scope.mode = mode;
                     sharedMessage.reset();
+                    try {
+                        element[0].saveValues = [];
+                        angular.forEach($(element[0]).find('textarea'), function(oldtextarea) {
+                            element[0].saveValues.push(oldtextarea.value);
+                        });
+                    } catch (error) {
+                        console.error(error);
+                    }
                 };
 
                 $scope.disableMode = function () {
+                    try {
+                        angular.forEach($(element[0]).find('textarea'), function(currenttextarea,key) {
+                            currenttextarea.value=element[0].saveValues[key];
+                            $('textarea').change();
+                        });
+                    } catch (error) {
+                        console.error(error);
+                    }
+
                     $scope.mode = null;
                     sharedMessage.reset();
                 };
