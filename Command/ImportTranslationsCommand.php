@@ -212,7 +212,7 @@ class ImportTranslationsCommand extends Command
             $translationPath = $this->getApplication()->getKernel()->getProjectDir().'/translations';
             $finder = $this->findTranslationsFiles($translationPath, $locales, $domains, false);
         } else {
-            $finder = $this->findTranslationsFiles($this->getApplication()->getKernel()->getRootDir(), $locales, $domains);
+            $finder = $this->findTranslationsFiles($this->getApplication()->getKernel()->getProjectDir(), $locales, $domains);
         }
         $this->importTranslationFiles($finder);
     }
@@ -245,7 +245,7 @@ class ImportTranslationsCommand extends Command
     {
         $path = $bundle->getPath();
         if ($global) {
-            $path = $this->getApplication()->getKernel()->getRootDir() . '/Resources/' . $bundle->getName() . '/translations';
+            $path = $this->getApplication()->getKernel()->getProjectDir() . '/Resources/' . $bundle->getName() . '/translations';
             $this->output->writeln('<info>*** Importing ' . $bundle->getName() . '`s translation files from ' . $path . ' ***</info>');
         }
 
