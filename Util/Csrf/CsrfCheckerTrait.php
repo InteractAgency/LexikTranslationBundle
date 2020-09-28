@@ -15,6 +15,10 @@ trait CsrfCheckerTrait
      */
     protected function checkCsrf($id = 'lexik-translation', $query = '_token')
     {
+        if($this->container->getParameter('lexik_translation.csrf_validation') === false){
+            return;
+        }
+
         if (!$this->has('security.csrf.token_manager')) {
             return;
         }

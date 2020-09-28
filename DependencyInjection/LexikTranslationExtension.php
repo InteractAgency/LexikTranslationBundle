@@ -48,6 +48,7 @@ class LexikTranslationExtension extends Extension implements PrependExtensionInt
         $container->setParameter('lexik_translation.storage', $config['storage']);
         $container->setParameter('lexik_translation.base_layout', $config['base_layout']);
         $container->setParameter('lexik_translation.grid_input_type', $config['grid_input_type']);
+        $container->setParameter('lexik_translation.csrf_validation', $config['csrf_validation']);
         $container->setParameter('lexik_translation.grid_toggle_similar', $config['grid_toggle_similar']);
         $container->setParameter('lexik_translation.auto_cache_clean', $config['auto_cache_clean']);
         $container->setParameter('lexik_translation.dev_tools.enable', $config['dev_tools']['enable']);

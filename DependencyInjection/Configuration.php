@@ -68,6 +68,9 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('grid_toggle_similar')
                     ->defaultValue(false)
                 ->end()
+                ->booleanNode('csrf_validation')
+                    ->defaultValue(true)
+                ->end()
 
                 ->booleanNode('auto_cache_clean')
                     ->defaultValue(false)
