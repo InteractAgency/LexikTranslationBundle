@@ -58,6 +58,8 @@
     </parameters>
 
     <services>
+        <defaults autowire="true" autoconfigure="true"/>
+
         <!-- Loader -->
         <service id="lexik_translation.loader.database" class="%lexik_translation.loader.database.class%">
             <argument type="service" id="lexik_translation.translation_storage" />
@@ -68,12 +70,12 @@
         <service id="lexik_translation.trans_unit.manager" class="%lexik_translation.trans_unit.manager.class%" public="true">
             <argument type="service" id="lexik_translation.translation_storage" />
             <argument type="service" id="lexik_translation.file.manager" />
-            <argument>%kernel.root_dir%</argument>
+            <argument>%kernel.project_dir%</argument>
         </service>
 
         <service id="lexik_translation.file.manager" class="%lexik_translation.file.manager.class%">
             <argument type="service" id="lexik_translation.translation_storage" />
-            <argument>%kernel.root_dir%</argument>
+            <argument>%kernel.project_dir%</argument>
         </service>
 
         <service id="lexik_translation.locale.manager" class="%lexik_translation.locale.manager.class%" public="true">
@@ -143,7 +145,7 @@
             <argument type="service" id="lexik_translation.file.manager" />
             <argument type="service" id="lexik_translation.translation_storage" />
             <argument type="service" id="lexik_translation.locale.manager" />
-            <argument>%kernel.root_dir%</argument>
+            <argument>%kernel.project_dir%</argument>
         </service>
 
         <!-- Listener -->
@@ -157,12 +159,13 @@
         <!-- Command -->
         <service id="Lexik\Bundle\TranslationBundle\Command\ImportTranslationsCommand" class="%lexik_translation.command.import_translations.class%">
             <argument type="service" id="translator" />
+            <argument type="service" id="service_container" />
             <tag name="console.command" />
         </service>
 
         <service id="Lexik\Bundle\TranslationBundle\Command\ExportTranslationsCommand" class="%lexik_translation.command.export_translations.class%">
+            <argument type="service" id="service_container" />
             <tag name="console.command" />
         </service>
-        
     </services>
 </container>

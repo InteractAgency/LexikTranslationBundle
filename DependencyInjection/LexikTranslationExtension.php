@@ -38,6 +38,9 @@ class LexikTranslationExtension extends Extension implements PrependExtensionInt
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yaml');
+
         // set parameters
         sort($config['managed_locales']);
         $container->setParameter('lexik_translation.managed_locales', $config['managed_locales']);
@@ -145,7 +148,7 @@ class LexikTranslationExtension extends Extension implements PrependExtensionInt
         if (Kernel::VERSION_ID >= 30300) {
             $rootDir = '%kernel.project_dir%/'.$rootDir;
         } else {
-            $rootDir = '%kernel.root_dir%/../'.$rootDir;
+            $rootDir = '%kernel.project_dir%/../'.$rootDir;
         }
 
         $container->prependExtensionConfig('twig', [
@@ -293,7 +296,7 @@ class LexikTranslationExtension extends Extension implements PrependExtensionInt
                 }
             }
 
-            $overridePath = $container->getParameter('kernel.root_dir').'/Resources/%s/translations';
+            $overridePath = $container->getParameter('kernel.project_dir').'/Resources/%s/translations';
 
             foreach ($container->getParameter('kernel.bundles') as $bundle => $class) {
                 $reflection = new \ReflectionClass($class);
@@ -307,7 +310,7 @@ class LexikTranslationExtension extends Extension implements PrependExtensionInt
                 }
             }
 
-            if (is_dir($dir = $container->getParameter('kernel.root_dir').'/Resources/translations')) {
+            if (is_dir($dir = $container->getParameter('kernel.project_dir').'/Resources/translations')) {
                 $dirs[] = $dir;
             }
 
