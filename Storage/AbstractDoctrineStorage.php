@@ -97,7 +97,7 @@ abstract class AbstractDoctrineStorage implements StorageInterface
      */
     public function clear($entityName = null)
     {
-        $this->getManager()->clear($entityName);
+        $this->getManager()->clear(null);
     }
 
     /**
